@@ -37,6 +37,8 @@ $(document).ready(function () {
   $('#firstDate').val(firstDate_str);
   $('#secondDate').val(secondDate_str);
 
+  $('#hi_firstDate').val(firstDate_str);
+  $('#hi_secondDate').val(secondDate_str);
 
   $('#data_5 .input-daterange').datepicker({
     keyboardNavigation: false,
@@ -44,12 +46,9 @@ $(document).ready(function () {
     autoclose: true
   });
 
-
   $('.demo1').colorpicker();
   $('#irs-1').addClass('hiden-settings');
   $('#datepicker').addClass('hiden-settings');
-
-  
 
   var amount1 = 2;
   var amount2 = 2;
@@ -84,30 +83,64 @@ $(document).ready(function () {
   $('#amount2').val(amount2);
   $('#amount3').val(amount3);
 
+  $('#hi_amount1').val(amount1);
+  $('#hi_amount2').val(amount2);
+  $('#hi_amount3').val(amount3);
+
   $('#color1').val(color1);
   $('#color2').val(color2);
   $('#color3').val(color3);
 
+  $('#hi_color1').val(color1);
+  $('#hi_color2').val(color2);
+  $('#hi_color3').val(color3);
 
-  $.get(
-    "/getData",
-    {
-      firstDate: firstDate,
-      secondDate: secondDate,
-      amount1: amount1,
-      amount2: amount2,
-      amount3: amount3,
-      color1: color1,
-      color2: color2,
-      color3: color3 
-    },
-    function(data, status){
-      if (status == 'success') {
-        $('#content').html(data);
-        var heightWithoutNavbar = $("body > #wrapper").height();
-        $(".settings-panel").css("min-height", heightWithoutNavbar + "px");
-      }
-  });
+
+  if (localStorage.getItem('search_key')) {
+    var search_key = '';
+    search_key = localStorage.getItem('search_key');
+    $('#search_key').val(search_key);
+    localStorage.removeItem('search_key');
+    $.get(
+      "/search",
+      {
+        firstDate: firstDate,
+        secondDate: secondDate,
+        amount1: amount1,
+        amount2: amount2,
+        amount3: amount3,
+        color1: color1,
+        color2: color2,
+        color3: color3,
+        search_key: search_key
+      },
+      function(data, status){
+        if (status == 'success') {
+          $('#content').html(data);
+          $("#ibox_1").draggable();
+        }
+    });
+  } else {
+    $.get(
+      "/getData",
+      {
+        firstDate: firstDate,
+        secondDate: secondDate,
+        amount1: amount1,
+        amount2: amount2,
+        amount3: amount3,
+        color1: color1,
+        color2: color2,
+        color3: color3 
+      },
+      function(data, status){
+        if (status == 'success') {
+          $('#content').html(data);
+          var heightWithoutNavbar = $("body > #wrapper").height();
+          $(".settings-panel").css("min-height", heightWithoutNavbar + "px");
+        }
+    });
+  }
 
   $(window).resize(() => {
     var heightWithoutNavbar = $("body > #wrapper").height();
@@ -133,37 +166,61 @@ $(document).ready(function () {
     var color2 = $('#color2').val();
     var color3 = $('#color3').val();
 
-    localStorage.setItem('firstDate', firstDate);
-    localStorage.setItem('secondDate', secondDate);
+    if (amount1 < 3200 && amount2 < 3200 && amount3 < 3200) {
+      localStorage.setItem('firstDate', firstDate);
+      localStorage.setItem('secondDate', secondDate);
 
-    localStorage.setItem('amount1', amount1);
-    localStorage.setItem('amount2', amount2);
-    localStorage.setItem('amount3', amount3);
+      localStorage.setItem('amount1', amount1);
+      localStorage.setItem('amount2', amount2);
+      localStorage.setItem('amount3', amount3);
 
-    localStorage.setItem('color1', color1);
-    localStorage.setItem('color2', color2);
-    localStorage.setItem('color3', color3);
+      localStorage.setItem('color1', color1);
+      localStorage.setItem('color2', color2);
+      localStorage.setItem('color3', color3);
 
-    $.get(
-      "/getData",
-      {
-        firstDate: firstDate,
-        secondDate: secondDate,
-        amount1: amount1,
-        amount2: amount2,
-        amount3: amount3,
-        color1: color1,
-        color2: color2,
-        color3: color3 
-      },
-      function(data, status){
-        if (status == 'success') {
-          $('#content').html(data);
-          $("#ibox_1").draggable();
-        }
-    });
+      $('#hi_firstDate').val(firstDateStr);
+      $('#hi_secondDate').val(secondDateStr);
+
+      $('#hi_amount1').val(amount1);
+      $('#hi_amount2').val(amount2);
+      $('#hi_amount3').val(amount3);
+
+      $('#hi_color1').val(color1);
+      $('#hi_color2').val(color2);
+      $('#hi_color3').val(color3);
+      
+      $.get(
+        "/getData",
+        {
+          firstDate: firstDate,
+          secondDate: secondDate,
+          amount1: amount1,
+          amount2: amount2,
+          amount3: amount3,
+          color1: color1,
+          color2: color2,
+          color3: color3,
+        },
+        function(data, status){
+          if (status == 'success') {
+            $('#content').html(data);
+            $("#ibox_1").draggable();
+          }
+      });
+
+    } else {
+      alert('Numbers must be low than 3200.');
+    }
 
   });
+
+
+
+  $('#search_form').submit(function() {
+    var search_key = $('#search_key').val();
+    localStorage.setItem('search_key', search_key);
+  });
+
 
 
   function initData() {
@@ -187,6 +244,9 @@ $(document).ready(function () {
     var secondDate_str = secondMonth + '/' + secondDate.getDate() + '/' + secondDate.getFullYear();
     $('#firstDate').val(firstDate_str);
     $('#secondDate').val(secondDate_str);
+
+    $('#hi_firstDate').val(firstDate_str);
+    $('#hi_secondDate').val(secondDate_str);
 
     $('#data_5 .input-daterange').datepicker({
       keyboardNavigation: false,
@@ -226,9 +286,19 @@ $(document).ready(function () {
     $('#amount2').val(amount2);
     $('#amount3').val(amount3);
 
+    $('#hi_amount1').val(amount1);
+    $('#hi_amount2').val(amount2);
+    $('#hi_amount3').val(amount3);
+
     $('#color1').val(color1);
     $('#color2').val(color2);
     $('#color3').val(color3);
+
+    $('#hi_color1').val(color1);
+    $('#hi_color2').val(color2);
+    $('#hi_color3').val(color3);
+
+
   }
 
 

@@ -1,9 +1,17 @@
 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0; background: #ffffff !important;">
   <div class="navbar-header">
     <a id="collaps_btn" class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
-    <form role="search" class="navbar-form-custom" method="post" action="#">
+    <form role="search" class="navbar-form-custom" method="post" id="search_form">
       <div class="form-group">
-        <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+        <input type="hidden" name="hi_firstDate" id="hi_firstDate" value="">
+        <input type="hidden" name="hi_secondDate" id="hi_secondDate" value="">
+        <input type="hidden" name="hi_amount1" id="hi_amount1" value="">
+        <input type="hidden" name="hi_amount2" id="hi_amount2" value="">
+        <input type="hidden" name="hi_amount3" id="hi_amount3" value="">
+        <input type="hidden" name="hi_color1" id="hi_color1" value="">
+        <input type="hidden" name="hi_color2" id="hi_color2" value="">
+        <input type="hidden" name="hi_color3" id="hi_color3" value="">
+        <input type="text" placeholder="Search for something..." class="form-control" name="search_key" id="search_key">
       </div>
     </form>
   </div>

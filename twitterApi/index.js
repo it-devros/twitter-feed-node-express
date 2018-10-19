@@ -22,6 +22,19 @@ class twitterAPIs {
     });
   }
 
+  static searchTweets (params) {
+    return new Promise(function(resolve, reject){
+      T.get('search/tweets', params, function(err, data, response) {
+        if(!err){
+          resolve(data);
+        } else {
+          console.log(err);
+          reject(err);
+        }
+      });
+    });
+  }
+
 }
 
 

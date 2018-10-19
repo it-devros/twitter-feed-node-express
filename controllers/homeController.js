@@ -69,6 +69,23 @@ class homeController {
     });
   }
 
+
+  static getDataSearch(req, res) {
+    Promise.resolve().then(function() {
+      var params = {
+        q: req.query.search_key,
+        count: req.query.amount1 + req.query.amount2 + req.query.amount3
+      }
+      return twitterAPIs.searchTweets(params)
+    }).then(function(data){
+      // console.log(data);
+      res.render('search', { data: data.statuses, moment: moment, color: req.query.color1 });
+    }).catch(function(err){
+      console.log(err);
+      res.render('error');
+    });
+  }
+
 }
 
 
