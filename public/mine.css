@@ -1,0 +1,31 @@
+
+
+#page-wrapper {
+  margin: 0;
+}
+
+.settings-panel {
+  width: 300px;
+  height: 100%;
+  padding: 15px;
+  background: #2f4050;
+  position: absolute;
+}
+
+.showed-settings {
+  display: block;
+  z-index: 10;
+}
+
+.showed-settings-table {
+  display: inline-table;
+  z-index: 10;
+}
+
+.hiden-settings {
+  display: none;
+}
+
+.mine-white {
+  color: white;
+}
