@@ -42,22 +42,22 @@ class homeController {
       var result1 = [];
       var result2 = [];
       var result3 = [];
-      var firstDate = moment(req.query.firstDate);
-      var secondDate = moment(req.query.secondDate);
+      var firstDate = new Date(req.query.firstDate);
+      var secondDate = new Date(req.query.secondDate);
       data1.forEach(function(item) {
-        let tempDate = moment(item.created_at);
+        let tempDate = new Date(item.created_at);
         if (tempDate >= firstDate && tempDate <= secondDate) {
           result1.push(item);
         }
       });
       data2.forEach(function(item) {
-        let tempDate = moment(item.created_at);
+        let tempDate = new Date(item.created_at);
         if (tempDate >= firstDate && tempDate <= secondDate) {
           result2.push(item);
         }
       });
       data3.forEach(function(item) {
-        let tempDate = moment(item.created_at);
+        let tempDate = new Date(item.created_at);
         if (tempDate >= firstDate && tempDate <= secondDate) {
           result3.push(item);
         }
