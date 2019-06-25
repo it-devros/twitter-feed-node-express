@@ -1,6 +1,6 @@
 
 module.exports = function(app) {
-	const home = require('./home');
+  const home = require('./home')
 
-	app.use('/', home);
-};
+  app.use('/', home)
+}

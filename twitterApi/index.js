@@ -1,8 +1,8 @@
-var Twitter = require('twit');
-var config = require('../config.js');
-var T = new Twitter(config);
+var Twitter = require('twit')
+var config = require('../config.js')
+var T = new Twitter(config)
 
-var Promise  = require('promise');
+var Promise  = require('promise')
 
 class twitterAPIs {
   constructor () {
@@ -13,30 +13,30 @@ class twitterAPIs {
     return new Promise(function(resolve, reject){
       T.get('statuses/user_timeline', params, function(err, data, response) {
         if(!err){
-          resolve(data);
+          resolve(data)
         } else {
-          console.log(err);
-          reject(err);
+          console.log(err)
+          reject(err)
         }
-      });
-    });
+      })
+    })
   }
 
   static searchTweets (params) {
     return new Promise(function(resolve, reject){
       T.get('search/tweets', params, function(err, data, response) {
         if(!err){
-          resolve(data);
+          resolve(data)
         } else {
-          console.log(err);
-          reject(err);
+          console.log(err)
+          reject(err)
         }
-      });
-    });
+      })
+    })
   }
 
 }
 
 
 
-module.exports = twitterAPIs;
+module.exports = twitterAPIs
