@@ -10,7 +10,7 @@
     "ejs": "^2.6.1",
     "ejs-locals": "^1.0.2",
     "error-handler": "^0.1.4",
-    "express": "~4.1.1",
+    "express": "~4.17.1",
     "method-override": "^1.0.0",
     "moment": "^2.22.2",
     "morgan": "^1.0.0",
